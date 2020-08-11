@@ -5,6 +5,7 @@ const helmet = require('helmet');
 require('dotenv').config();
 
 const middlewares = require('./middlewares');
+const api = require('./api');
 
 const app = express();
 const server = require('http').Server(app);
@@ -24,6 +25,8 @@ app.get('/', (_req, res) => {
   });
   res.io.emit('ahsheep', 'hello sheep');
 });
+
+app.use('/api/v1', api);
 
 app.use(middlewares.notFound);
 app.use(middlewares.errorHandler);
